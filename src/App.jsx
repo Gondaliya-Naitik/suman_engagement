@@ -25,9 +25,35 @@ export default function App() {
     return () => document.body.classList.remove("locked");
   }, [opened]);
 
+  // Start the song inside the very first tap/keypress (browsers only allow
+  // audible playback from a real gesture) and retry until it actually begins.
+  useEffect(() => {
+    if (!wedding.music.src) return undefined;
+    const kick = () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+      audio.volume = 1; // full sound
+      audio
+        .play()
+        .then(() => {
+          setMusicOn(true);
+          window.removeEventListener("pointerdown", kick);
+          window.removeEventListener("keydown", kick);
+        })
+        .catch(() => {});
+    };
+    window.addEventListener("pointerdown", kick);
+    window.addEventListener("keydown", kick);
+    return () => {
+      window.removeEventListener("pointerdown", kick);
+      window.removeEventListener("keydown", kick);
+    };
+  }, []);
+
   const playMusic = () => {
     const audio = audioRef.current;
     if (!audio) return;
+    audio.volume = 1; // full sound
     audio
       .play()
       .then(() => setMusicOn(true))

@@ -5,10 +5,15 @@ export default function Hero() {
   const { hero, couple } = wedding;
 
   return (
-    <section
-      className="hero"
-      style={hero.background ? { backgroundImage: `url(${hero.background})` } : undefined}
-    >
+    <section className="hero">
+      {hero.background && (
+        <div
+          className="hero-bg"
+          style={{ backgroundImage: `url(${hero.background})` }}
+          aria-hidden="true"
+        />
+      )}
+
       <div className="hero-inner">
         {hero.ganesh && (
           <span className="hero-ganesh">

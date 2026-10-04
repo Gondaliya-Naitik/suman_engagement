@@ -20,7 +20,7 @@ export const wedding = {
 
   // ---------- Hero (Ganesh + names + date) ----------
   hero: {
-    background: "/images/hero-bg.png", // full-screen photo behind the names
+    background: "/images/couple-animated.png", // shown soft-blurred behind the names
     ganesh: "/images/ganesh.png", // small Ganesh image at the top
     mantra: "॥ ॐ गं गणपतये नमो नमः ॥",
     kicker: "Celebrating the engagement of",
@@ -93,7 +93,8 @@ export const wedding = {
 
   // ---------- Blessings band ----------
   blessings: {
-    image: "/images/scene-arch.png", // photo above the blessing lines
+    video: "/videos/blessings.mp4", // loops silently above the blessing lines
+    image: "", // optional still photo (used only when "video" is empty)
     text: "With the blessings of our elders and the love of our families, as we step into this beautiful new chapter, having you beside us makes it complete.",
     calendarLabel: "Add to Calendar",
     calendarTitle: "Suman & Naitik — Engagement",
@@ -133,7 +134,7 @@ export const wedding = {
 
   // ---------- Background music ----------
   music: {
-    src: "", // e.g. "/music/wedding-song.mp3"
+    src: "/audio/aaj-sajeya.mp3", // plays at full volume once the envelope is tapped
   },
 };
 
