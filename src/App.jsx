@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { wedding } from "./config";
-import Envelope from "./components/Envelope";
+import Gate from "./components/Gate";
 import Hero from "./components/Hero";
 import Countdown from "./components/Countdown";
 import Story from "./components/Story";
@@ -19,7 +19,7 @@ export default function App() {
   const [musicOn, setMusicOn] = useState(false);
   const audioRef = useRef(null);
 
-  // Lock scrolling while the envelope is showing
+  // Lock scrolling while the opening gate is showing
   useEffect(() => {
     document.body.classList.toggle("locked", !opened);
     return () => document.body.classList.remove("locked");
@@ -83,7 +83,7 @@ export default function App() {
         <audio ref={audioRef} src={wedding.music.src} loop preload="metadata" />
       )}
 
-      {!opened && <Envelope onOpen={handleOpen} />}
+      {!opened && <Gate onOpen={handleOpen} />}
 
       <main>
         <Hero />

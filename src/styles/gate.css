@@ -1,0 +1,550 @@
+/* ============================================================
+   Opening gate — an architect's drawing sheet taped to the board.
+   Tap: the plan inks itself, the sanction stamp lands, the sheet
+   lifts away and the invitation is revealed.
+   ============================================================ */
+
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 3.4vh, 26px);
+  background: radial-gradient(
+    120% 92% at 50% 8%,
+    #14313d 0%,
+    #0b2029 52%,
+    #06131a 100%
+  );
+  transition: opacity 0.75s ease 1.6s;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.gate.is-opening {
+  opacity: 0;
+}
+
+/* ---------- drafting backdrop ---------- */
+.gate-grid {
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  background-image: linear-gradient(
+      rgba(163, 217, 234, 0.15) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(163, 217, 234, 0.15) 1px, transparent 1px),
+    linear-gradient(rgba(163, 217, 234, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(163, 217, 234, 0.07) 1px, transparent 1px);
+  background-size: 112px 112px, 112px 112px, 14px 14px, 14px 14px;
+  -webkit-mask-image: radial-gradient(
+    108% 82% at 50% 46%,
+    #000 26%,
+    transparent 84%
+  );
+  mask-image: radial-gradient(108% 82% at 50% 46%, #000 26%, transparent 84%);
+}
+
+.gate-marks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gate-mark {
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  font-size: calc(clamp(13px, 2.6vw, 20px) * var(--s));
+  color: rgba(191, 227, 240, 0.36);
+  user-select: none;
+  animation: gateDrift var(--t) ease-in-out var(--d) infinite alternate;
+}
+
+.gate-mark--code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: -0.02em;
+}
+
+.gate-mark--plan {
+  font-family: var(--font-serif);
+}
+
+@keyframes gateDrift {
+  from {
+    transform: translateY(-11px);
+    opacity: 0.22;
+  }
+  to {
+    transform: translateY(13px);
+    opacity: 0.72;
+  }
+}
+
+/* sheet notes in the corners, like a real drawing */
+.gate-corner {
+  position: absolute;
+  max-width: 44vw;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: rgba(191, 227, 240, 0.5);
+}
+
+.gate-corner--tl {
+  top: clamp(16px, 4vw, 32px);
+  left: clamp(16px, 4vw, 32px);
+}
+
+.gate-corner--br {
+  right: clamp(16px, 4vw, 32px);
+  bottom: clamp(16px, 4vw, 32px);
+  text-align: right;
+}
+
+.gate-title {
+  margin: 0;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: clamp(27px, 7vw, 38px);
+  line-height: 1.15;
+  text-align: center;
+  color: #f5edda;
+  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- the drawing sheet (tap target) ---------- */
+.gate-sheet {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  width: min(88vw, 430px);
+  aspect-ratio: 26 / 17;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: linear-gradient(158deg, #fbf6ea 0%, #f2ead7 62%, #e9dfc7 100%);
+  box-shadow: 0 34px 70px rgba(0, 0, 0, 0.55), 0 4px 14px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(122, 112, 84, 0.3);
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  animation: gateIn 1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes gateIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px) rotate(-1deg) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* printed drafting grid on the paper */
+.gate-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background-image: linear-gradient(rgba(118, 127, 91, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(118, 127, 91, 0.14) 1px, transparent 1px);
+  background-size: 18px 18px;
+  pointer-events: none;
+}
+
+/* masking tape holding the sheet to the board */
+.gate-tape {
+  position: absolute;
+  top: -11px;
+  width: 84px;
+  height: 24px;
+  z-index: 2;
+  background: rgba(240, 231, 205, 0.66);
+  border-left: 1px dashed rgba(122, 112, 84, 0.3);
+  border-right: 1px dashed rgba(122, 112, 84, 0.3);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
+}
+
+.gate-tape--l {
+  left: 7%;
+  transform: rotate(-5deg);
+}
+
+.gate-tape--r {
+  right: 7%;
+  transform: rotate(4deg);
+}
+
+/* ---------- the plan (left) ---------- */
+.gate-drawing {
+  position: relative;
+}
+
+.gate-plan {
+  position: absolute;
+  inset: 11% 7% 15% 9%;
+  color: rgba(92, 102, 64, 0.95);
+}
+
+.gate-plan--ghost {
+  opacity: 0.32;
+}
+
+.gate-plan--ink {
+  opacity: 0;
+}
+
+/* the shapes draw in the sheet's ink colour */
+.gate-plan rect,
+.gate-plan path {
+  stroke: currentColor;
+}
+
+/* pathLength="100" on every shape keeps the draw-in even */
+.gate-plan--ink rect,
+.gate-plan--ink path:not(.gate-heart) {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+.gate-plan .gate-heart {
+  fill: rgba(118, 127, 91, 0.75);
+  stroke: none;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ---------- title block (right) ---------- */
+.gate-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 10% 8% 11% 7%;
+  border-left: 1px dashed rgba(118, 127, 91, 0.55);
+}
+
+.gate-mono {
+  position: relative;
+  display: block;
+  padding: 12px 4px 6px;
+  font-family: var(--font-script);
+  font-size: clamp(30px, 8.4vw, 42px);
+  line-height: 1;
+  text-align: center;
+  color: var(--sage-deep);
+}
+
+/* the compass ring keeps sweeping while you wait */
+.gate-ring {
+  position: absolute;
+  inset: -6px -8px 0;
+  border: 1px dashed rgba(118, 127, 91, 0.5);
+  border-radius: 50%;
+  animation: gateSpin 24s linear infinite;
+}
+
+@keyframes gateSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gate-rows {
+  display: grid;
+  gap: 0;
+}
+
+.gate-rows > span {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 0;
+  border-top: 1px solid rgba(118, 127, 91, 0.32);
+}
+
+.gate-rows i {
+  min-width: 44px;
+  font-style: normal;
+  font-family: var(--font-sans);
+  font-size: 7px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(96, 106, 68, 0.82);
+}
+
+.gate-rows b {
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: rgba(52, 58, 40, 0.95);
+}
+
+.gate-note {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 8.5px;
+  line-height: 1.5;
+  color: rgba(96, 106, 68, 0.9);
+}
+
+/* ---------- sanction stamp ---------- */
+.gate-stamp {
+  position: absolute;
+  left: 13%;
+  bottom: 12%;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  padding: 7px 13px 6px;
+  border: 2px solid rgba(118, 127, 91, 0.85);
+  border-radius: 4px;
+  outline: 1px solid rgba(118, 127, 91, 0.45);
+  outline-offset: 3px;
+  background: rgba(252, 248, 238, 0.3);
+  color: var(--sage-deep);
+  font-family: var(--font-sans);
+  text-align: center;
+  opacity: 0;
+  transform: rotate(-11deg) scale(1.9);
+  pointer-events: none;
+}
+
+.gate-stamp b {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.gate-stamp i {
+  font-style: normal;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+}
+
+/* ---------- the sanction sequence ---------- */
+.gate.is-opening .gate-sheet {
+  animation: gateLift 0.62s cubic-bezier(0.4, 0, 0.6, 1) 1.78s forwards;
+}
+
+@keyframes gateLift {
+  to {
+    transform: translateY(-54px) scale(1.06) rotate(1.4deg);
+    opacity: 0;
+  }
+}
+
+/* pencil lines hand over to ink */
+.gate.is-opening .gate-plan--ghost {
+  animation: gateFade 0.6s ease 0.9s forwards;
+}
+
+@keyframes gateFade {
+  to {
+    opacity: 0.1;
+  }
+}
+
+.gate.is-opening .gate-plan--ink {
+  opacity: 1;
+}
+
+.gate.is-opening .gate-plan--ink rect,
+.gate.is-opening .gate-plan--ink path:not(.gate-heart) {
+  animation: gateInk 0.8s ease-out forwards;
+}
+
+@keyframes gateInk {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.gate.is-opening .gate-plan--ink > :nth-child(1) {
+  animation-delay: 0.04s;
+}
+.gate.is-opening .gate-plan--ink > :nth-child(2) {
+  animation-delay: 0.13s;
+}
+.gate.is-opening .gate-plan--ink > :nth-child(3) {
+  animation-delay: 0.22s;
+}
+.gate.is-opening .gate-plan--ink > :nth-child(4) {
+  animation-delay: 0.31s;
+}
+.gate.is-opening .gate-plan--ink > :nth-child(5) {
+  animation-delay: 0.4s;
+}
+.gate.is-opening .gate-plan--ink > :nth-child(6) {
+  animation-delay: 0.49s;
+}
+.gate.is-opening .gate-plan--ink > :nth-child(7) {
+  animation-delay: 0.58s;
+}
+.gate.is-opening .gate-plan--ink > :nth-child(8) {
+  animation-delay: 0.67s;
+}
+.gate.is-opening .gate-plan--ink > :nth-child(9) {
+  animation-delay: 0.76s;
+}
+
+.gate.is-opening .gate-heart {
+  animation: gateHeart 0.55s cubic-bezier(0.2, 1.5, 0.4, 1) 1.02s both;
+}
+
+@keyframes gateHeart {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.gate.is-opening .gate-mono {
+  animation: gatePop 0.6s ease 0.85s both;
+}
+
+@keyframes gatePop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.12);
+  }
+}
+
+.gate.is-opening .gate-stamp {
+  animation: gateStamp 0.52s cubic-bezier(0.2, 1.35, 0.35, 1) 1.3s forwards;
+}
+
+@keyframes gateStamp {
+  0% {
+    opacity: 0;
+    transform: rotate(-26deg) scale(2.1);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-11deg) scale(1);
+  }
+}
+
+/* ---------- role chips ---------- */
+.gate-roles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(8px, 2.6vw, 16px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gate-roles li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid rgba(191, 227, 240, 0.26);
+  border-radius: 999px;
+  background: rgba(8, 26, 33, 0.55);
+}
+
+.gate-roles i {
+  font-style: normal;
+  font-size: 12.5px;
+  color: #c3e2ee;
+}
+
+.gate-roles b {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1;
+  color: #f6efdd;
+}
+
+.gate-roles span {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(214, 232, 238, 0.72);
+}
+
+/* ---------- hint ---------- */
+.gate-hint {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(244, 238, 224, 0.78);
+  animation: hintPulse 2.2s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+
+.gate.is-opening .gate-hint {
+  opacity: 0;
+}
+
+@keyframes hintPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* keep the sheet notes clear of the title on small screens */
+@media (max-width: 900px), (max-height: 640px) {
+  .gate-corner {
+    display: none;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .gate-sheet,
+  .gate-hint,
+  .gate-mark,
+  .gate-ring {
+    animation: none;
+  }
+
+  .gate.is-opening .gate-plan--ink {
+    opacity: 1;
+  }
+
+  .gate.is-opening .gate-plan--ink rect,
+  .gate.is-opening .gate-plan--ink path:not(.gate-heart) {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .gate-stamp {
+    opacity: 1;
+    transform: rotate(-11deg);
+  }
+
+  .gate.is-opening .gate-sheet {
+    animation: none;
+    opacity: 0;
+  }
+}

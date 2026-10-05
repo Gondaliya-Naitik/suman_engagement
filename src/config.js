@@ -12,10 +12,16 @@
 // ============================================================
 
 export const wedding = {
-  // ---------- Envelope opening screen ----------
+  // ---------- Opening gate (blueprint sheet) ----------
   envelope: {
-    seal: "S & N", // initials on the wax seal
-    hint: "Tap to open", // small hint text under the envelope
+    seal: "S & N", // monogram on the sheet
+    hint: "Tap to break ground", // pulsing line under the sheet
+    sheetTitle: "Two drafts, one forever", // script line above the sheet
+    stampText: "Sanctioned with love", // words on the stamp that lands on tap
+    roles: [
+      { name: "Suman", role: "Architect", glyph: "◇" },
+      { name: "Naitik", role: "Web Developer", glyph: "</>" },
+    ],
   },
 
   // ---------- Hero (Ganesh + names + date) ----------
@@ -50,12 +56,12 @@ export const wedding = {
     withText: "With",
     bride: {
       name: "Suman", // hero + couple section
-      parents: "(D/O: Mr. Rajesh & Mrs. Sunita, G/D: Mr. Mohan & Late Smt. Kamla)",
+      parents: "(D/O: Mr. Ashok Kumar & Mrs. Tina Nolkha, G/D: Late Shri Dalchand Nolkha & Smt. Pandevi)",
       photo: "/images/bride.png",
     },
     groom: {
-      name: "Naitik",
-      parents: "(S/O: Mr. Mahesh & Mrs. Kavita, G/S: Late Shri Ramlal & Smt. Shanti)",
+      name: "Rajvir (Naitik)",
+      parents: "(S/O: Mr. Kanti Bhai & Mrs. Shardaben Gondaliya, G/S: Shri BabuBhai Gondaliya  & Late Smt. Shantaaben)",
       photo: "/images/groom.png",
     },
   },
@@ -71,7 +77,7 @@ export const wedding = {
         date: "Sunday, 18 October 2026",
         time: "07:00 PM Onwards",
         venue: "Hotel Tulsi Icon, Surat",
-        dress: "Glitz & Glam",
+        dress: "",
         theme: "",
       },
     ],
@@ -103,13 +109,12 @@ export const wedding = {
   // ---------- Sharing the joy ----------
   joy: {
     heading: "Sharing The Joy",
-    host: "Mr. Rohit Patel",
+    host: "Mr. Harsh Nolkha",
     hostNote: "With Best Compliments",
     compliments: [
-      "Mr. Mukesh & Mrs. Aakanksha",
-      "Mr. Durgesh & Mrs. Sangeeta",
-      "Mr. Janmay",
-      "Mr. Rishabh",
+      "Mr. Vikram & Mrs. Priyanka",
+      "Mr. Ankit & Mrs. Hema",
+      "Miss. Twinkle"
     ],
   },
 
@@ -118,9 +123,9 @@ export const wedding = {
     heading: "Assistance & Coordination",
     note: "Presents In Blessings Only.",
     people: [
-      { name: "Rahul", phone: "+91 90000 00001" },
-      { name: "Meera", phone: "+91 90000 00002" },
-      { name: "Kunal", phone: "+91 90000 00003" },
+      { name: "Ashok Kumar Nolkha", phone: "+91 94281 42854" },
+      { name: "Harsh Nolkha", phone: "+91 94845 10746" },
+      { name: "Tina Nolkha", phone: "+91 96874 56346" },
     ],
   },
 
@@ -128,7 +133,7 @@ export const wedding = {
   footer: {
     names: "Suman & Naitik",
     dateLine: "18-10-2026",
-    craftedBy: "Crafted With Love",
+    craftedBy: "Two Hearts, One Beautiful Story",
     craftedUrl: "", // optional link (Instagram etc.)
   },
 
