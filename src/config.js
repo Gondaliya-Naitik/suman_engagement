@@ -75,7 +75,7 @@ export const wedding = {
         name: "Engagement & Ring Ceremony",
         img: "/images/event-engagement.png",
         date: "Sunday, 18 October 2026",
-        time: "07:00 PM Onwards",
+        time: "09:30 AM Onwards",
         venue: "Hotel Tulsi Icon, Surat",
         dress: "",
         theme: "",
