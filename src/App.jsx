@@ -78,7 +78,7 @@ export default function App() {
   };
 
   return (
-    <div className="card">
+    <div className={`card${opened ? " is-open" : ""}`}>
       {wedding.music.src && (
         <audio ref={audioRef} src={wedding.music.src} loop preload="metadata" />
       )}

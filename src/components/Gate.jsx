@@ -42,6 +42,15 @@ function Plan({ className, heart = false }) {
 }
 
 /**
+ * How long the sanction sequence plays before the card is handed over:
+ * ink draws in (0-2.9s) > pencil fades (1.9s) > monogram pops (2.1s) >
+ * heart (2.45s) > stamp lands (3.4-4.4s) > the sheet lifts and the overlay
+ * fades (4.5-5.65s). The hero then eases up behind it.
+ */
+const SEQUENCE_MS = 5800;
+const QUICK_MS = 500; // for guests who asked for reduced motion
+
+/**
  * Full-screen opening screen: Suman's drawing sheet, taped to the board.
  * Tapping it inks the plan, lands the sanction stamp, then lifts the sheet
  * away to reveal the invitation.
@@ -59,8 +68,9 @@ export default function Gate({ onOpen }) {
   const open = () => {
     if (opening) return;
     setOpening(true);
-    // Let the ink + stamp sequence play, then reveal the card
-    window.setTimeout(() => onOpen(), 2350);
+    // Let the ink + stamp sequence play out slowly, then reveal the card
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    window.setTimeout(() => onOpen(), reduced ? QUICK_MS : SEQUENCE_MS);
   };
 
   const site = wedding.venue.name.split(",")[0];
