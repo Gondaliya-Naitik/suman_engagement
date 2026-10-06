@@ -122,7 +122,7 @@ export const wedding = {
     host: ["Mr. Harsh Nolkha", "Miss. Twinkal Nolkha"], // one line each
     hostNote: "With Best Compliments",
     compliments: [
-      "Nokha Family"
+      "Nolkha Family"
     ],
   },
 
