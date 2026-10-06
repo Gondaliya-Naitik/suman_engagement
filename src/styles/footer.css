@@ -47,7 +47,8 @@
 
 /* ---------- sharing the joy ---------- */
 .joy {
-  padding: clamp(54px, 10vw, 74px) 0 clamp(50px, 9vw, 66px);
+  /* small bottom padding — "Assistance & Coordination" follows right after */
+  padding: clamp(54px, 10vw, 74px) 0 clamp(20px, 4vw, 26px);
   text-align: center;
 }
 
@@ -92,7 +93,7 @@
 
 /* ---------- assistance & coordination ---------- */
 .contacts {
-  padding: clamp(46px, 9vw, 62px) 0 clamp(54px, 10vw, 70px);
+  padding: clamp(20px, 4vw, 26px) 0 clamp(54px, 10vw, 70px);
   text-align: center;
 }
 

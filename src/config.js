@@ -36,7 +36,7 @@ export const wedding = {
   // ---------- Countdown ----------
   countdown: {
     heading: "Until the Celebration",
-    date: "2026-10-18T19:00:00", // YYYY-MM-DDTHH:mm:ss — engagement date & time
+    date: "2026-10-18T09:30:00", // YYYY-MM-DDTHH:mm:ss — engagement date & time
     labels: { days: "Days", hours: "Hours", minutes: "Minutes", seconds: "Seconds" },
   },
 
@@ -51,6 +51,7 @@ export const wedding = {
   },
 
   // ---------- Couple + parents ----------
+  // "parents" prints as one block per comma, and " & " goes on its own line.
   couple: {
     photo: "/images/scene-night.png", // the two of you together (full-width photo)
     withText: "With",
@@ -75,7 +76,16 @@ export const wedding = {
         name: "Engagement & Ring Ceremony",
         img: "/images/event-engagement.png",
         date: "Sunday, 18 October 2026",
-        time: "09:30 AM Onwards",
+        time: "09:30 AM to 10:30 AM",
+        venue: "Hotel Tulsi Icon, Surat",
+        dress: "",
+        theme: "",
+      },
+      {
+        name: "Lunch",
+        img: "/images/event-lunch.png",
+        date: "Sunday, 18 October 2026",
+        time: "11:30 AM to 12:30 PM",
         venue: "Hotel Tulsi Icon, Surat",
         dress: "",
         theme: "",
@@ -109,11 +119,10 @@ export const wedding = {
   // ---------- Sharing the joy ----------
   joy: {
     heading: "Sharing The Joy",
-    host: ["Mr. Harsh Nolkha", "Miss. Twinkle Nolkha"], // one line each
+    host: ["Mr. Harsh Nolkha", "Miss. Twinkal Nolkha"], // one line each
     hostNote: "With Best Compliments",
     compliments: [
-      "Mr. Vikram & Mrs. Priyanka",
-      "Mr. Ankit & Mrs. Hema",
+      "Nokha Family"
     ],
   },
 
@@ -122,7 +131,7 @@ export const wedding = {
     heading: "Assistance & Coordination",
     note: "Presents In Blessings Only.",
     people: [
-      { name: "Ashok Kumar Nolkha", phone: "+91 94281 42854" },
+      { name: "Ashok Kumar Nolkha", phone: "+91 94281 42859" },
       { name: "Harsh Nolkha", phone: "+91 94845 10746" },
       { name: "Tina Nolkha", phone: "+91 96874 56346" },
     ],
