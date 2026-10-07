@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { wedding } from "./config";
 import Gate from "./components/Gate";
-import PhotoFeedback from "./components/PhotoFeedback";
 import Hero from "./components/Hero";
 import Countdown from "./components/Countdown";
 import Story from "./components/Story";
@@ -18,9 +17,6 @@ import MusicToggle from "./components/MusicToggle";
 export default function App() {
   const [opened, setOpened] = useState(false);
   const [musicOn, setMusicOn] = useState(false);
-  // the photo question is asked before anything else ("" turns it off)
-  const [asked, setAsked] = useState(() => Boolean(wedding.feedback?.question));
-  const [autoOpen, setAutoOpen] = useState(false);
   const audioRef = useRef(null);
 
   // Lock scrolling while the opening gate is showing
@@ -87,16 +83,7 @@ export default function App() {
         <audio ref={audioRef} src={wedding.music.src} loop preload="metadata" />
       )}
 
-      {!opened && <Gate onOpen={handleOpen} autoOpen={autoOpen} />}
-
-      {asked && (
-        <PhotoFeedback
-          onGood={() => {
-            setAsked(false);
-            setAutoOpen(true); // answered "Achhe" — open the card for them
-          }}
-        />
-      )}
+      {!opened && <Gate onOpen={handleOpen} />}
 
       <main>
         <Hero />

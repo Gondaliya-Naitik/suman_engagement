@@ -12,19 +12,6 @@
 // ============================================================
 
 export const wedding = {
-  // ---------- "Hamare photos kaise lage?" popup ----------
-  // Asked before the card opens. "Achhe" opens the card, "Bure" shows the
-  // full-page image below and keeps the card closed.
-  // Set question to "" to switch the popup off entirely.
-  feedback: {
-    question: "Hamare photos kaise lage?",
-    good: "Achhe",
-    bad: "Bure",
-    badImage: "/images/scene-night (2).png", // shown full page on "Bure"
-    badText: "Arre! Bure lage? 🙈 Card toh khulne hi nahi denge ab…",
-    retry: "Phir se poocho",
-  },
-
   // ---------- Opening gate (blueprint sheet) ----------
   envelope: {
     seal: "S & N", // monogram on the sheet
