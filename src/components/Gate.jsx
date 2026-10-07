@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { wedding } from "../config";
 
 /** Drafting symbols + code tokens that drift across the blueprint backdrop. */
@@ -55,9 +55,10 @@ const QUICK_MS = 500; // for guests who asked for reduced motion
  * Tapping it inks the plan, lands the sanction stamp, then lifts the sheet
  * away to reveal the invitation.
  */
-export default function Gate({ onOpen }) {
+export default function Gate({ onOpen, autoOpen = false }) {
   const { seal, hint, sheetTitle, roles, stampText } = wedding.envelope;
   const [opening, setOpening] = useState(false);
+  const startedRef = useRef(false);
 
   // Lock scrolling while the gate is showing
   useEffect(() => {
@@ -66,12 +67,20 @@ export default function Gate({ onOpen }) {
   }, []);
 
   const open = () => {
-    if (opening) return;
+    if (startedRef.current) return;
+    startedRef.current = true;
     setOpening(true);
     // Let the ink + stamp sequence play out slowly, then reveal the card
     const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     window.setTimeout(() => onOpen(), reduced ? QUICK_MS : SEQUENCE_MS);
   };
+
+  // The guest already answered the photo question, so play the sheet for them
+  // instead of waiting for another tap.
+  useEffect(() => {
+    if (autoOpen) open();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoOpen]);
 
   const site = wedding.venue.name.split(",")[0];
 
